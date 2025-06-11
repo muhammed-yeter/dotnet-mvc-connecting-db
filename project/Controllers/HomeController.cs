@@ -16,6 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewBag.header = "Anasayfa";
         var postlar = (from x in db.Posts
                        join y in db.Turlers on x.Turid equals y.Id
                        orderby x.Id descending
@@ -35,6 +36,7 @@ public class HomeController : Controller
     [Route("/posts/{type}")]
     public IActionResult Posts(int? type)
     {
+
         if (type != null)
         {
             var postlar = (from x in db.Posts
@@ -48,6 +50,7 @@ public class HomeController : Controller
                                turId = x.Turid,
                                turAdi = y.Ad
                            }).ToList();
+            ViewBag.header = postlar.First().turAdi + " Gönderilerinin Listesi";
             return View(postlar);
         }
         else
@@ -62,6 +65,7 @@ public class HomeController : Controller
                                turId = x.Turid,
                                turAdi = y.Ad
                            }).ToList();
+            ViewBag.header = "Tüm Gönderiler";
             return View(postlar);
         }
     }
@@ -82,6 +86,7 @@ public class HomeController : Controller
                            yazi = x.Yazi,
                            turAdi = y.Ad
                        }).FirstOrDefault();
+        ViewBag.header = "Gönderinin Özellikleri";
         return View(postlar);
     }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

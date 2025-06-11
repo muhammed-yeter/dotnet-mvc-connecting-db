@@ -1,0 +1,8 @@
+<h1 class="mb-3 h2">Türlere Göre Seçim</h1>
+<div class="p-4 pb-2 d-flex align-items-center w-100 justify-content-center gap-3">
+    @foreach (var x in Model)
+    {
+        <a href="/posts/@x.Id" class="@x.Stil btn tech m-2">@x.Ad</a>
+    }
+</div>
+<a class="btn btn-secondary mb-5" href="/posts/">Tümü</a>

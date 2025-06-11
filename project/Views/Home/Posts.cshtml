@@ -1,0 +1,33 @@
+@model List<blog_site.Models.ViewModels.PostVM>
+<div id="intro" class="p-5 w-100 text-center bg-light align-items-center justify-content-center d-flex flex-column">
+    @await Component.InvokeAsync("typeList")
+    <a class="btn btn-primary m-2" asp-action="Index" asp-controller="Home">Ana Sayfayı Görüntüle</a>
+</div>
+<section class="text-center">
+    <h4 class="mb-5"><strong>Tüm Gönderiler</strong></h4>
+
+    <div class="row">
+        @foreach (var post in Model)
+        {
+            <div class="col-lg-4 col-md-12 mb-4">
+                <div
+                    class="card @(post.turId == 1 ? "tech-card" : post.turId == 2 ? "health-card" : post.turId == 3 ? "travel-card" : post.turId == 4 ? "education-card" : post.turId == 5 ? "culture-card" : "")  h-100">
+                    <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                        <a href="/post/@post.id">
+                            <div
+                                class="cardimg @(post.turId == 1 ? "tech" : post.turId == 2 ? "health" : post.turId == 3 ? "travel" : post.turId == 4 ? "education" : post.turId == 5 ? "culture" : "")">
+                                <h4 class="p-5">@post.turAdi</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-start">@post.baslik</h5>
+                        <p class="text-start">
+                            @post.onsoz
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
